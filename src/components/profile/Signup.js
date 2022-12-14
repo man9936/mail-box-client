@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 import { Button, Card } from "react-bootstrap";
 import { Form, Container } from "react-bootstrap";
@@ -14,7 +14,7 @@ const Signup = () => {
 
   const submitFormHandler = (e) => {
     e.preventDefault();
-
+    const hidtory = useHistory();
     const emailValue = emailInputRef.current.value;
     const passwordValue = passwordInputRef.current.value;
     const confirmpassword = confirmpasswordRef.current.value;
@@ -33,17 +33,18 @@ const Signup = () => {
           body: JSON.stringify({
             email: emailValue,
             password: passwordValue,
-            returnSecureToken: true
+            returnSecureToken: true,
           }),
           headers: {
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         }
       ).then((response) => {
         setSendingRequest(false);
         if (response.ok) {
           //return response.json();
           console.log("User has successfully signed up");
+          history.replace("./welcome");
         } else {
           response.json().then((data) => {
             let errorMessage = "Authentication Failed!";
@@ -59,9 +60,9 @@ const Signup = () => {
 
   return (
     <>
-      <Container className="mt-5" style={{ width: "550px" }}>
-        <Card className="shadow-lg" style={{ marginTop: "150px" }}>
-          <Card.Header style={{ backgroundColor: "grey" }}>
+      <Container className="mt-5" style={{ width: "400px" }}>
+        <Card className="shadow-lg" style={{ marginTop: "100px" }}>
+          <Card.Header style={{ backgroundColor: "lightseagreen" }}>
             <h4>SignUp</h4>
           </Card.Header>
           <Card.Body>
@@ -90,13 +91,29 @@ const Signup = () => {
                   required
                 />
               </Form.Group>
-              <Button
-                variant="secondary"
-                type="submit"
-                style={{ marginLeft: "400px" }}
-              >
-                Submit
-              </Button>
+              <Form.Group>
+                <Button
+                  style={{
+                    backgroundColor: "lightseagreen",
+                    marginLeft: "120px",
+                  }}
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Form.Group>
+              {isSendingRequest && (
+                <Alert style={{ textAlign: "center" }}>Sending Request</Alert>
+              )}
+              <Card.Footer className="mt-3" style={{ textAlign: "center" }}>
+                <span>Don't have an account?</span>
+                <NavLink
+                  style={{ textDecoration: "none", color: "black" }}
+                  to="/"
+                >
+                  SignUp
+                </NavLink>
+              </Card.Footer>
             </Form>
           </Card.Body>
         </Card>
