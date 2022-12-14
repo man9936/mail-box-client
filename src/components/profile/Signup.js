@@ -109,9 +109,9 @@ const Signup = () => {
                 <span>Don't have an account?</span>
                 <NavLink
                   style={{ textDecoration: "none", color: "black" }}
-                  to="/"
+                  to="/login"
                 >
-                  SignUp
+                  Login
                 </NavLink>
               </Card.Footer>
             </Form>
