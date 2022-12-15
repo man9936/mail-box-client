@@ -14,12 +14,12 @@ const Signup = () => {
 
   const submitFormHandler = (e) => {
     e.preventDefault();
-    const hidtory = useHistory();
+    const history = useHistory();
     const emailValue = emailInputRef.current.value;
     const passwordValue = passwordInputRef.current.value;
     const confirmpassword = confirmpasswordRef.current.value;
 
-    if (passwordValue != confirmpassword) {
+    if (passwordValue !== confirmpassword) {
       setError(true);
       alert("Password does not match");
       setSendingRequest(false);

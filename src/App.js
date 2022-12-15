@@ -7,6 +7,8 @@ import SignUp from "./pages/SignupPage";
 import Welcome from "./pages/WelcomePage";
 import ComposeMailPage from "./pages/ComposeMailPage";
 import Nav from "./UI/Nav";
+import InboxPage from "./pages/InboxPage";
+import MailOptions from "./components/MailOptions";
 
 export default function App() {
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
@@ -23,6 +25,14 @@ export default function App() {
           {isLogin && <Welcome></Welcome>}
           {/* {!isLogin && <Redirect to="/login"></Redirect>} */}
         </Route>
+        <Route path="/inboxPage">
+          <header>
+            <Nav />
+            <MailOptions />
+          </header>
+          <InboxPage />
+        </Route>
+
         <Route path="/composemail">
           {isLogin && (
             <>

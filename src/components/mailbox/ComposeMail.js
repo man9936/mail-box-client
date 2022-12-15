@@ -43,8 +43,9 @@ const ComposeMail = () => {
     });
   };
 
-  const changeEmailHandler = (e) => {
-    setEmail(e.target.value);
+  const onEditorStateChange = (event) => {
+    const bodyText = event.getCurrentContent().getPlainText();
+    setEmail(bodyText);
   };
 
   return (
@@ -70,13 +71,19 @@ const ComposeMail = () => {
           </Card.Header>
           <Card.Body style={{ height: "60%" }}>
             <Editor
+              onEditorStateChange={onEditorStateChange}
               toolbarClassName="toolbarClassName"
               wrapperClassName="wrapperClassName"
               editorClassName="editorClassName"
             ></Editor>
           </Card.Body>
           <Card.Footer className=" bg-secondary">
-            <Button variant="success" type="submit" onClick={sendMailHandler}>
+            <Button
+              variant="success"
+              style={{ marginLeft: "40%" }}
+              type="submit"
+              onClick={sendMailHandler}
+            >
               Send
             </Button>
           </Card.Footer>
